@@ -1,17 +1,17 @@
 # tcc-gestao-pecuaria
 
-Sistema de análise de dados para gestão reprodutiva de rebanho bovino. TCC do curso de Ciência da Computação (Python, SQL, Excel, Power BI).
+Pipeline de análise de dados para gestão reprodutiva de rebanho bovino. TCC do curso de Ciência da Computação (Python, SQL, Excel).
 
 ## Objetivo
 
-Construir um pipeline de análise de dados que transforma registros brutos de matrizes, touros e partos em indicadores de gestão reprodutiva, servindo de base para um dashboard em Power BI.
+Construir um pipeline de análise de dados que transforma registros brutos de matrizes, touros e partos em indicadores de gestão reprodutiva, exportando uma base tratada em formato compatível com ferramentas de BI.
 
 Objetivos específicos:
 - Processar e limpar os dados brutos da planilha de origem.
 - Carregar os dados em um banco relacional (SQLite).
 - Calcular o Intervalo Entre Partos (IEP) por matriz.
 - Mapear a sazonalidade dos partos ao longo do ano.
-- Exportar uma base tratada para consumo externo (Power BI).
+- Exportar a base tratada em um formato pronto para uso em ferramentas de BI (ex: Power BI).
 
 ## Estrutura do projeto
 
@@ -24,21 +24,20 @@ tcc-gestao-pecuaria/
 │   └── TCC_Analise_Gado.ipynb   # Pipeline completo de análise
 ├── reports/
 │   ├── dashboard_reproducao.png       # Painel com os indicadores (gerado)
-│   └── Relatorio_Fazenda_Final_BR.xlsx # Base tratada para o Power BI (gerado)
+│   └── Relatorio_Fazenda_Final_BR.xlsx # Base tratada, pronta para uso em BI (gerado)
 ├── sql/
 │   └── fazenda.db      # Banco SQLite local (gerado)
 ├── requirements.txt
 └── README.md
 ```
 
-As pastas `data/processed`, `reports` e `sql` são criadas e preenchidas automaticamente ao rodar o notebook.
+As pastas `data/processed`, `reports` e `sql` são criadas e preenchidas automaticamente ao rodar o notebook. Os arquivos gerados (banco, imagem e planilha) não são versionados no Git — apenas o código-fonte.
 
 ## Tecnologias utilizadas
 
 - Python (pandas, matplotlib)
 - SQLite
 - Excel (openpyxl)
-- Power BI (consumo do arquivo exportado)
 
 ## Como executar
 
@@ -54,7 +53,10 @@ Os resultados (banco SQLite, imagem do painel e planilha final) são gerados aut
 
 ## Limitações
 
-A tabela de touros não possui vínculo direto com os registros de parto na fonte de dados atual, o que impede o cruzamento de informações de paternidade com os indicadores reprodutivos.
+- A tabela `Touros` é carregada e disponibilizada no banco de dados, mas não existe um campo que relacione cada parto ao touro responsável. Por esse motivo, não foi possível cruzar informações de paternidade com os indicadores reprodutivos nesta versão.
+- O cálculo do IEP é limitado pelo volume de dados: poucas matrizes possuem mais de um parto registrado, o que reduz o tamanho da amostra usada nesse indicador.
+- O projeto lê os dados de uma planilha estática. Não há uma interface para cadastro ou atualização de registros.
+- A planilha final é exportada em um formato pronto para consumo em ferramentas de BI, mas a construção de um dashboard (Power BI ou similar) não faz parte do escopo deste projeto.
 
 ## Autor
 
