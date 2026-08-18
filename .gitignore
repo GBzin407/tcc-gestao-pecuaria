@@ -184,3 +184,6 @@ cython_debug/
 sql/*.db
 reports/*.png
 reports/*.xlsx
+
+# Dashboard Power BI (gerado)
+reports/*.pbix
